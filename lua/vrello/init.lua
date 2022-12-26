@@ -9,7 +9,7 @@ local config = string.format("%s/vrello.json", utils.project_path())
 local M = {}
 
 function M.get_config_path()
-  return config
+  print(config)
 end
 
 local vrello_augroup = vim.api.nvim_create_augroup("VRELLO_AUGROUP", {
