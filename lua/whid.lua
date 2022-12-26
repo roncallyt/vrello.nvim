@@ -26,8 +26,8 @@ local function open_window()
   local border_opts = {
     style = "minimal",
     relative = "editor",
-    width = win_width + 2,
-    height = win_height + 2,
+    width = win_width + 1,
+    height = win_height + 1,
     row = row - 1,
     col = col - 1
   }
