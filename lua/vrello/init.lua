@@ -3,7 +3,7 @@ local utils = require("vrello.utils")
 local Dev = require("vrello.dev")
 local log = Dev.log
 
-local config = string.format("%s/vrello.json", utils.project_path())
+local config = string.format("%s/vrello-config.json", utils.project_path())
 
 local M = {}
 
@@ -54,7 +54,7 @@ end
 
 -- 1. saved.  Where do we save?
 function M.setup(config)
-  print(read_config())
+  print(read_config(config))
 
   log.debug("setup(): Complete config", VrelloConfig)
   log.trace("setup(): log_key", Dev.get_log_key())
