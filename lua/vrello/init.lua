@@ -54,10 +54,10 @@ end
 
 -- 1. saved.  Where do we save?
 function M.setup(config)
-  print(read_config())
+  return read_config()
 
-  log.debug("setup(): Complete config", VrelloConfig)
-  log.trace("setup(): log_key", Dev.get_log_key())
+  -- log.debug("setup(): Complete config", VrelloConfig)
+  -- log.trace("setup(): log_key", Dev.get_log_key())
 end
 
 -- Sets a default config with no values
