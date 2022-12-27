@@ -47,14 +47,14 @@ local function merge_tables(...)
     return out
 end
 
-local function read_config(config)
+local function read_config()
     log.trace("_read_config():", config)
     return vim.json.decode(Path:new(config):read())
 end
 
 -- 1. saved.  Where do we save?
 function M.setup(config)
-  print(read_config(config))
+  print(read_config())
 
   log.debug("setup(): Complete config", VrelloConfig)
   log.trace("setup(): log_key", Dev.get_log_key())
