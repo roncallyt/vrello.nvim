@@ -3,7 +3,15 @@ local utils = require("vrello.utils")
 local Dev = require("vrello.dev")
 local log = Dev.log
 
-local config = string.format("%s/vrello-config.json", utils.project_path())
+local initial_config = {
+  board = "",
+  key = "",
+  member = "",
+  query = "",
+  token = ""
+}
+
+local project_config = string.format("%s/vrello-config.json", utils.project_path())
 
 local M = {}
 
@@ -88,7 +96,7 @@ function M.save_config()
     Path:new(config):write(vim.fn.json_encode(VrelloConfig), "w")
 end
 
-local function read_config()
+local function read_config(config)
     log.trace("_read_config():", config)
 
     return vim.json.decode(Path:new(config):read())
@@ -106,16 +114,12 @@ function M.setup(config)
     if not ok then
         log.debug("setup(): No project config present at", project_config)
 
-        p_config = {}
+        p_config = initial_config
+
+        Path:new(project_config):write(vim.fn.json_encode(p_config), "w")
     end
 
-    local complete_config = merge_tables({
-        board = "",
-        key = "",
-        member = "",
-        query = "",
-        token = ""
-    }, p_config, config)
+    local complete_config = merge_tables(initial_config, p_config, config)
 
     ensure_correct_config(complete_config)
 
