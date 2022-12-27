@@ -47,17 +47,86 @@ local function merge_tables(...)
     return out
 end
 
+local function ensure_correct_config(config)
+    log.trace("_ensure_correct_config()")
+
+    local board = config.board
+    if board == nil then
+        log.debug("ensure_correct_config(): No board config found for:", utils.project_path())
+        config.board = ""
+    end
+
+    local key = config.key
+    if key == nil then
+        log.debug("ensure_correct_config(): No key config found for:", utils.project_path())
+        config.key = ""
+    end
+
+    local member = config.member
+    if member == nil then
+        log.debug("ensure_correct_config(): No member config found for:", utils.project_path())
+        config.member = ""
+    end
+
+    local query = config.query
+    if query == nil then
+        log.debug("ensure_correct_config(): No query config found for:", utils.project_path())
+        config.query = ""
+    end
+
+    local token = config.token
+    if token == nil then
+        log.debug("ensure_correct_config(): No token config found for:", utils.project_path())
+        config.token = ""
+    end
+
+    return config
+end
+
+function M.save_config()
+    log.trace("save(): Saving cache config to", config)
+    Path:new(config):write(vim.fn.json_encode(VrelloConfig), "w")
+end
+
 local function read_config()
     log.trace("_read_config():", config)
+
     return vim.json.decode(Path:new(config):read())
 end
 
--- 1. saved.  Where do we save?
 function M.setup(config)
-  return read_config()
+    log.trace("setup(): Setting up...")
 
-  -- log.debug("setup(): Complete config", VrelloConfig)
-  -- log.trace("setup(): log_key", Dev.get_log_key())
+    if not config then
+        config = {}
+    end
+
+    local ok, p_config = pcall(read_config, project_config)
+
+    if not ok then
+        log.debug("setup(): No project config present at", project_config)
+
+        p_config = {}
+    end
+
+    local complete_config = merge_tables({
+        board = "",
+        key = "",
+        member = "",
+        query = "",
+        token = ""
+    }, p_config, config)
+
+    ensure_correct_config(complete_config)
+
+    VrelloConfig = complete_config
+
+    log.debug("setup(): Complete config", VrelloConfig)
+    log.trace("setup(): log_key", Dev.get_log_key())
+end
+
+function M.print_config()
+    print(vim.inspect(VrelloConfig))
 end
 
 -- Sets a default config with no values
