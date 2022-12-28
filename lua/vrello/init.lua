@@ -139,7 +139,7 @@ function M.test_curl()
 
   Job:new({
     command = "curl",
-    args = { url },
+    args = { url, "--header 'Accept: application/json'", "--request GET" },
     on_exit = function(j, return_val)
       --print(vim.inspect(return_val))
       print(vim.inspect(j:result()))
