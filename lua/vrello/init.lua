@@ -135,7 +135,7 @@ function M.print_config()
 end
 
 function M.test_curl()
-  local url = "https://api.trello.com/1/members/thomersonroncallyaraujoteixeira/boards?fields=id,name&key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
+  local url = "https://api.trello.com/1/members/" .. VrelloConfig.member .. "/boards?fields=id,name&key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
 
   Job:new({
     command = "curl",
