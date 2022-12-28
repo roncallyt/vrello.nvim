@@ -141,8 +141,8 @@ function M.test_curl()
     command = "curl",
     args = { url },
     on_exit = function(j, return_val)
-      print(return_val)
-      print(j:result())
+      print(vim.inspect(return_val))
+      print(vim.inspect(j:result()))
     end,
   }):start()
 end
