@@ -141,7 +141,6 @@ function M.test_curl()
     command = "curl",
     args = { url },
     on_exit = function(j, return_val)
-      print(vim.inspect(vim.fn.json_decode(return_val)))
       print(vim.inspect(vim.fn.json_decode(j:result())))
     end,
   }):start()
