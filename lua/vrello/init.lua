@@ -1,4 +1,5 @@
 local Path = require("plenary.path")
+local Job = require("plenary.job")
 local utils = require("vrello.utils")
 local Dev = require("vrello.dev")
 local log = Dev.log
@@ -135,14 +136,13 @@ end
 
 function M.test_curl()
   local url = "https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
-  local Job = require("plenary.job")
 
   Job:new({
     command = "curl",
     args = { url },
     on_exit = function(j, return_val)
       --print(vim.inspect(return_val))
-      print(vim.inspect(j:result()))
+      print(vim.inspect.inspect(j:result()))
     end,
   }):start()
 end
