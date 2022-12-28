@@ -47,4 +47,12 @@ function M.is_white_space(str)
     return str:gsub("%s", "") == ""
 end
 
+function M.char_to_pchar(c)
+	return string.format("%%%02X", c:byte(1,1))
+end
+
+function M.encodeURIComponent(str)
+	return (str:gsub("[^%w%-_%.%!%~%*%'%(%)]", M.char_to_pchar))
+end
+
 return M

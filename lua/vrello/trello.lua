@@ -27,7 +27,7 @@ function M.get_cards_by_query()
     return
   end
 
-  local url = "https://api.trello.com/1/search?idBoards=" .. VrelloConfig.board .. "&query=" .. VrelloConfig.query .. "&card_fields=name,due,desc,url&key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
+  local url = "https://api.trello.com/1/search?idBoards=" .. VrelloConfig.board .. "&query=" .. utils.encodeURIComponent(VrelloConfig.query) .. "&card_fields=name,due,desc,url&key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
 
   local out, ret, _ = utils.get_os_command_output({
     "curl",
