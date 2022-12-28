@@ -142,7 +142,7 @@ function M.test_curl()
     args = { url },
     on_exit = function(j, return_val)
       --print(vim.inspect(return_val))
-      print(vim.inspect.inspect(j:result()))
+      print(j:result())
     end,
   }):start()
 end
