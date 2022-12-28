@@ -135,7 +135,7 @@ function M.print_config()
 end
 
 function M.test_curl()
-  local url = "http://pokeapi.co/api/v2/pokemon/ditto"
+  local url = "http://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
 
   Job:new({
     command = "curl",
