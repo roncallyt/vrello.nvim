@@ -135,14 +135,14 @@ function M.print_config()
 end
 
 function M.test_curl()
-  local url = "https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
+  local url = "http://pokeapi.co/api/v2/pokemon/ditto"
 
   Job:new({
     command = "curl",
     args = { url },
     on_exit = function(j, return_val)
       --print(vim.inspect(return_val))
-      print(j:result())
+      print(vim.inspect(j:result()))
     end,
   }):start()
 end
