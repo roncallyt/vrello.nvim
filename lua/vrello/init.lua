@@ -135,10 +135,17 @@ function M.print_config()
 end
 
 function M.test_curl()
+  local url = "https://api.trello.com/1/members/thomersonroncallyaraujoteixeira/boards?fields=id,name&key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
+
   Job:new({
     command = "curl",
     args = {
-      "--request", "GET", "--url", "https://pokeapi.co/api/v2/pokemon/ditto", "--header", "'Accept: application/json'"
+      "--request", 
+      "GET", 
+      "--url", 
+      url, 
+      "--header", 
+      "'Accept: application/json'"
     },
     on_exit = function(j, return_val)
       --print(vim.inspect(return_val))
