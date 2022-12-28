@@ -133,6 +133,20 @@ function M.print_config()
     print(vim.inspect(VrelloConfig))
 end
 
+function M.test_curl()
+  local url = "https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow"
+  local Job = require("plenary.job")
+
+  Job:new({
+    command = "curl",
+    args = { url },
+    on_exit = function(j, return_val)
+      print(return_val)
+      print(j:result())
+    end,
+  }):start()
+end
+
 -- Sets a default config with no values
 M.setup()
 
