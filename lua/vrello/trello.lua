@@ -17,7 +17,7 @@ function M.get_boards()
     "'Accept: application/json'"
   }, vim.loop.cwd())
 
-  print(out)
+  print(vim.inspect(out))
 end
 
 return M
