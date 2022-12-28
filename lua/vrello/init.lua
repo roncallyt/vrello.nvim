@@ -135,14 +135,12 @@ function M.print_config()
 end
 
 function M.test_curl()
-  local url = "https://pokeapi.co/api/v2/pokemon/ditto"
-
   Job:new({
     command = "curl",
-    args = { url, "--header 'Accept: application/json'", "--request GET" },
+    args = {  "--request GET", "--url https://pokeapi.co/api/v2/pokemon/ditto", "--header 'Accept: application/json'" },
     on_exit = function(j, return_val)
-      --print(vim.inspect(return_val))
-      print(vim.inspect(j:result()))
+      print(vim.inspect(return_val))
+      --print(vim.inspect(j:result()))
     end,
   }):start()
 end
