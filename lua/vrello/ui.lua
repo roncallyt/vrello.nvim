@@ -6,7 +6,7 @@ function M.input()
   vim.ui.input({
     prompt = "Enter the API Key: ",
     default = "",
-    completion = "",
+    completion = nil,
     highlight = function(input)
       if  string.len(input) > 8 then
         return { { 0, 8, "InputHighlight" } }
