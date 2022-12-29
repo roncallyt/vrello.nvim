@@ -48,9 +48,7 @@ function M.select_board()
     end,
   }, function(board)
     if board then
-      print("You selected " .. board.name .. " with ID " .. board.id)
-    else
-      print "You cancelled"
+      VrelloConfig.board = board.id
     end
   end)
 end

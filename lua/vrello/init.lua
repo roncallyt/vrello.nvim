@@ -141,9 +141,9 @@ function M.setup(config)
 
     ensure_correct_config(complete_config)
 
-    ensure_required_fields_are_present(complete_config)
-
     VrelloConfig = complete_config
+
+    ensure_required_fields_are_present(VrelloConfig)
 
     if not ok then
       Path:new(project_config):write(vim.fn.json_encode(VrelloConfig), "w")
