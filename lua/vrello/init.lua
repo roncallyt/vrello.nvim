@@ -1,6 +1,7 @@
 local Path = require("plenary.path")
 local Job = require("plenary.job")
 local utils = require("vrello.utils")
+local ui = require("vrello.ui")
 local Dev = require("vrello.dev")
 local log = Dev.log
 
@@ -103,6 +104,24 @@ local function read_config(config)
     return vim.json.decode(Path:new(config):read())
 end
 
+local function ensure_required_fields_are_present(config)
+  if config.key == "" then
+    ui.set_key()
+  end
+
+  if config.token == "" then
+    ui.set_token()
+  end
+
+  if config.member == "" then
+    ui.set_member()
+  end
+
+  if config.board == "" then
+    ui.select_board()
+  end
+end
+
 function M.setup(config)
     log.trace("setup(): Setting up...")
 
@@ -123,6 +142,8 @@ function M.setup(config)
     local complete_config = merge_tables(initial_config, p_config, config)
 
     ensure_correct_config(complete_config)
+
+    ensure_required_fields_are_present(complete_config)
 
     VrelloConfig = complete_config
 
