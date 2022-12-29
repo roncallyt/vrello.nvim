@@ -21,6 +21,38 @@ function M.get_boards()
   return vim.fn.json_decode(out)
 end
 
+function M.get_labels_on_board(board)
+  local url = "https://api.trello/1/boards/" .. VrelloConfig.board .. "/labels?key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
+
+  local out, ret, _ = utils.get_os_command_output({
+    "curl",
+    "--request",
+    "GET",
+    "--url", 
+    url, 
+    "--header", 
+    "'Accept: application/json'"
+  }, vim.loop.cwd())
+
+  return vim.fn.json_decode(out)
+end
+
+function M.get_lists_on_board(board)
+  local url = "https://api.trello/1/boards/" .. VrelloConfig.board .. "/lists?key=" .. VrelloConfig.key .. "&token=" .. VrelloConfig.token
+
+  local out, ret, _ = utils.get_os_command_output({
+    "curl",
+    "--request",
+    "GET",
+    "--url", 
+    url, 
+    "--header", 
+    "'Accept: application/json'"
+  }, vim.loop.cwd())
+
+  return vim.fn.json_decode(out)
+end
+
 function M.get_cards_by_query()
   if VrelloConfig.board == "" then
     log.debug("get_cards(): No board config found for:", utils.project_path())

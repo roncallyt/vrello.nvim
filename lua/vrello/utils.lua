@@ -1,6 +1,11 @@
 local Path = require("plenary.path")
 local Job = require("plenary.job")
 
+-- Private functions
+local function char_to_pchar(c)
+	return string.format("%%%02X", c:byte(1,1))
+end
+
 local M = {}
 
 function M.project_key()
@@ -45,10 +50,6 @@ end
 
 function M.is_white_space(str)
     return str:gsub("%s", "") == ""
-end
-
-local function char_to_pchar(c)
-	return string.format("%%%02X", c:byte(1,1))
 end
 
 function M.encodeURIComponent(str)
