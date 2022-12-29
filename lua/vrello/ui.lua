@@ -8,6 +8,7 @@ function M.set_key()
   }, function(input)
     if input then
       VrelloConfig.key = input
+      print ""
     else
       print "This step is required to connect with Trello API"
     end
@@ -20,6 +21,7 @@ function M.set_token()
   }, function(input)
     if input then
       VrelloConfig.token = input
+      print ""
     else
       print "This step is required to connect with Trello API"
     end
@@ -32,6 +34,7 @@ function M.set_member()
   }, function(input)
     if input then
       VrelloConfig.member = input
+      print ""
     else
       print "This step is required to get your boards."
     end
@@ -49,6 +52,7 @@ function M.select_board()
   }, function(board)
     if board then
       VrelloConfig.board = board.id
+      print ""
     end
   end)
 end
