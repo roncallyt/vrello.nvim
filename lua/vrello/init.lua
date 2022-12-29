@@ -135,8 +135,6 @@ function M.setup(config)
         log.debug("setup(): No project config present at", project_config)
 
         p_config = initial_config
-
-        Path:new(project_config):write(vim.fn.json_encode(p_config), "w")
     end
 
     local complete_config = merge_tables(initial_config, p_config, config)
@@ -146,6 +144,10 @@ function M.setup(config)
     ensure_required_fields_are_present(complete_config)
 
     VrelloConfig = complete_config
+
+    if not ok then
+      Path:new(project_config):write(vim.fn.json_encode(VrelloConfig), "w")
+    end
 
     log.debug("setup(): Complete config", VrelloConfig)
     log.trace("setup(): log_key", Dev.get_log_key())
